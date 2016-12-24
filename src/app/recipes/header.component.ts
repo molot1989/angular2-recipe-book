@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RecipeService } from './recipes/recipe.service'
 
 @Component({
   selector: 'rb-header',
@@ -7,6 +6,6 @@ import { RecipeService } from './recipes/recipe.service'
 })
 export class HeaderComponent {
 
-  constructor(private recipeService: RecipeService) { }
+  constructor() { }
 
 }

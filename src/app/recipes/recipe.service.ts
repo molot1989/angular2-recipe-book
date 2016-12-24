@@ -10,17 +10,12 @@ import { Ingredient } from './ingredient';
 export class RecipeService {
   recipesChanged = new EventEmitter<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe('Schnitzel', 'Very tasty', 'http://tv.ua/img/article/880/40_main.jpg', [
-      new Ingredient('French Fries', 2),
-      new Ingredient('Pork Meat', 1)
-    ]),
-    new Recipe('Summer Salad', 'Okayish', 'http://ohmyveggies.com/wp-content/uploads/2013/06/the_perfect_summer_salad.jpg', [])
-  ];
+  private recipes: Recipe[] = [];
 
   constructor(private http: Http) {}
 
   getRecipes() {
+    this.fetchData()
     return this.recipes;
   }
   
@@ -30,6 +25,11 @@ export class RecipeService {
 
   deleteRecipe(recipe: Recipe) {
     this.recipes.splice(this.recipes.indexOf(recipe), 1);
+    console.log('aaaa')
+        console.log(this.recipes)
+        this.storeData();
+
+
   }
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
@@ -39,6 +39,7 @@ export class RecipeService {
   }
 
   storeData() {
+
     const body = JSON.stringify(this.recipes);
     const headers = new Headers({ 'Content-Type': 'application/json' });
     return this.http.put('https://recipe-book-f0621.firebaseio.com/recipe.json', body, { headers: headers});

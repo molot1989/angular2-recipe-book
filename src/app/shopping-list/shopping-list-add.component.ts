@@ -32,10 +32,20 @@ export class ShoppingListAddComponent implements OnChanges {
       this.item = newIngredient;
       this.sls.addItem(this.item);
     }
+    this.sls.storeData().subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    )
+
   }
 
   onDelete() {
     this.sls.deleteItem(this.item);
+    this.sls.storeData().subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    )
+
     this.onClear();
   }
 

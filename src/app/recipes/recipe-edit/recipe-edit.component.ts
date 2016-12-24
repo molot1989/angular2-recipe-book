@@ -55,6 +55,10 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     } else {
       this.recipeService.editRecipe(this.recipe, newRecipe);
     }
+    this.recipeService.storeData().subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    )
     this.navigateBack();
   }
 
@@ -76,6 +80,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
   onRemoveItem(index: number) {
     (<FormArray>this.recipeForm.controls['ingredients']).removeAt(index);
+    
   }
 
   ngOnDestroy() {

@@ -8,7 +8,7 @@ import { Recipe } from '../recipe';
   templateUrl: './recipe-list.component.html',
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [];
+  @Output() recipes: Recipe[] = [];
 
   constructor(private recipeService: RecipeService) {}
 
