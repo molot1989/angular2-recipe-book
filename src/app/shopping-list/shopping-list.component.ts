@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { Ingredient } from '../recipes/ingredient'
 import { ShoppingListService } from './shopping-list.service'

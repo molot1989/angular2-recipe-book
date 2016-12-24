@@ -47,11 +47,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   onAddToShoppingList() {
     this.sls.addItems(this.selectedRecipe.ingredients);
-    this.sls.storeData().subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    )
-
   }
 
   ngOnDestroy() {
