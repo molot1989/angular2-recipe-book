@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Rx";
+import { AngularFire, AuthProviders, AuthMethods ,FirebaseAuthState,FirebaseAuth} from 'angularfire2';
 
 
 import { Recipe } from '../recipe'
@@ -15,11 +16,20 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   selectedRecipe:Recipe;
   private recipeIndex:number;
   private subscription: Subscription;
+  user;
 
   constructor(private sls:ShoppingListService,
               private router:Router,
               private route:ActivatedRoute,
-              private recipesService:RecipeService,) {
+              private recipesService:RecipeService,private recipeService: RecipeService, public auth:FirebaseAuth) {
+          this.auth.subscribe(state => {
+          if(state != null){
+          this.user = state.auth;
+         } else {
+           this.user = null;
+         }
+        })
+
   }
 
   ngOnInit() {

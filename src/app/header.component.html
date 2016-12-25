@@ -9,15 +9,20 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a [routerLink]="['/recipes']">Recipes</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/shopping-list']">Shopping list</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/shopping-list']" *ngIf="user">Shopping list</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" rbDropdown>
-          <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+         <li *ngIf="!user">
+          <a role="button" aria-haspopup="true" aria-expanded="false" (click)="login()">Login</a>
+        </li>
+
+         <li *ngIf="user">
+           <img class="img-circle" [src]="user.photoURL" style="height: 50px">
+        </li>
+        <li class="dropdown" rbDropdown *ngIf="user">
+          <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">{{ user?.displayName }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a style="cursor: pointer">Setup</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a style="cursor: pointer">Logout</a></li>
+            <li><a style="cursor: pointer"(click)="logout()">Logout</a></li>
           </ul>
         </li>
       </ul>
